@@ -1,14 +1,14 @@
 <?php
-
-
-$USER = 'root';
-$HOST = 'localhost';
-$PASSWORD = '';
-$DATABASE = 'proyam';
-$conn = mysqli_connect($USER, $HOST, $PASSWORD, $DATABASE);
-if(!$conn){
-    die('connection failed'.mysqli_connect_errno());
-}echo 'Connected successfully';
-mysqli_close($conn);
-
+// $conn = mysqli_connect(
+//     'localhost',
+//     'root',
+//     '',
+//     'proyam'
+// );
+$conn = mysqli_connect(
+    'sql205.byethost8.com',
+    'b8_33043033',
+    'S0p0rt3Max',
+    'b8_33043033_proyam'
+);
 ?>

@@ -1,3 +1,5 @@
+<!-- sweet alert -->
+<script src="/onlineShop/src/js/sweetalert2.all.min.js"></script>
 <!-- Boostrap -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -42,7 +44,7 @@
                 </div>
                 <div class="col">
                     <a target="_blank" style="text-decoration: none;"
-                        href="https://wa.me/593983752190?text=%20Hola%20me%20interesa%20su%20producto">
+                        href="https://wa.me/593992865788?text=%20Hola%20deseo%20saber%20mas%20informacion">
                         <span style="display: flex; margin-top: 5px;">
                             <svg style="fill: rgb(1, 82, 1);" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"

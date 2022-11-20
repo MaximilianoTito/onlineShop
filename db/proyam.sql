@@ -9,6 +9,8 @@ CREATE TABLE catalogue(
 	name VARCHAR(50),
     description TEXT,
     price DECIMAL(5,2),
+    quantity int,
+    catalogprice DECIMAL(5,2),
     status BOOLEAN DEFAULT true
 );
 CREATE TABLE users(
@@ -25,4 +27,5 @@ SELECT * FROM user_admin;
 SELECT * FROM catalogue;
 SELECT * FROM users;
 DROP TABLE IF EXISTS catalogue;
-
+UPDATE catalogue SET status = false WHERE status is true;
+SELECT * FROM catalogue WHERE status=true;
