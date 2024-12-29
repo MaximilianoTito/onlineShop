@@ -25,7 +25,7 @@ if (isset($_POST["update"])) {
     $quantityup = $_POST["quantity"];
     $priceup = $_POST["price"];
     $catalogpriceup = $_POST['catalogprice'];
-    $n_img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+    //$n_img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
 
     $queryup = "UPDATE catalogue SET name = '$nameup', description= '$descriptionup', price= '$priceup', img= '$n_img', quantity='$quantityup', catalogprice= '$catalogpriceup' WHERE id= $id";
     mysqli_query($conn, $queryup);

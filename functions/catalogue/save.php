@@ -9,7 +9,7 @@ if (isset($_POST["save"])) {
     $quantity = $_POST['quantity'];
     $description = $_POST["description"];
     $catalogprice = $_POST['catalogprice'];
-    $n_img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+    //$n_img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
     $query = "INSERT INTO catalogue (name,description,price, img, quantity, catalogprice) VALUES ('$name', '$description',$price, '$n_img', '$quantity', '$catalogprice');";
     mysqli_query($conn, $query);
     header("Location: ../../views/auth/logged.php");
@@ -47,7 +47,7 @@ if (isset($_POST["new-save"])) {
                     aria-label="With textarea" required ></textarea>
             </div>
             <div class="input-group mb-3">
-                <input type="file" required accept="image/*" name="image">
+                <input type="file" accept="image/*" name="image">
             </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-success" name="save">Guardar</button>

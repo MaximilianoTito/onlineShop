@@ -1,7 +1,7 @@
 <?php
 session_start();
-$name = 'Joel';
-$password = 'joel';
+$name = 'max';
+$password = 'max';
 $namebtn = $_POST['name'];
 $passwordbtn = $_POST['password'];
 
