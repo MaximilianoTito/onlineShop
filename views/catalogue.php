@@ -54,7 +54,7 @@ while($row = mysqli_fetch_array($resul){ ?>
           </p>
         </div>
         <a class="btn btn-success" target="_blank"
-          href="https://wa.me/593992865788?text=Me%20interesa%20saber%20mas%20del%20producto%20*_<?php echo $row['name']?>_*%20con%20el%20costo%20de%20*_<?php echo $row['price']?>_*"
+          href="https://wa.me/593968840308?text=Me%20interesa%20saber%20mas%20del%20producto%20*_<?php echo $row['name']?>_*%20con%20el%20costo%20de%20*_<?php echo $row['price']?>_*"
           ; style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
           <svg fill="white" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="20" height="20">
             <circle cx="7" cy="22" r="2" />

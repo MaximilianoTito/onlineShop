@@ -16,7 +16,7 @@ $result = mysqli_query($conn, $query);
                     src="data:image/jpg;base64, <?php echo base64_encode($row['img']) ?>" alt="...">
             </div>
             <div class="col-md-8">
-                <div class="card-header"><span style="color: orangered; font-size: 19px; font-weight: bolder;">
+                <div class="card-header"><span style="color: orangered; font-size: 19px; font-weight: bolder;"> 
                     <?php echo $row['name'] ?>
                 </span></div>
                 <div class="card-body">
@@ -32,8 +32,8 @@ $result = mysqli_query($conn, $query);
                         </small>
                     </p>
                     <div class="d-grid gap-2">
-                        <a class="btn btn-success"
-                            href="https://wa.me/593992865788?text=Me%20interesa%20saber%20mas%20del%20producto%20en%20oferta%20*_<?php echo $row['name'] ?>_*%20con%20el%20costo%20de%20*_<?php echo $row['price'] ?>_*"
+                        <a class="btn btn-success" target="_blank"
+                            href="https://wa.me/593968840308?text=Me%20interesa%20saber%20mas%20del%20producto%20en%20oferta%20*_<?php echo $row['name'] ?>_*%20con%20el%20costo%20de%20*_<?php echo $row['price'] ?>_*"
                             ;
                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                             <svg fill="white" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
