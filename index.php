@@ -13,7 +13,7 @@ $result = mysqli_query($conn, $query);
         <div class="row g-0">
             <div class="col-md-4">
                 <img class="img rounded-start rounded-end"
-                    src="data:image/jpg;base64, <?php echo base64_encode($row['img']) ?>" alt="...">
+                    src="uploads/<?php echo($row['img']) ?>" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-header"><span style="color: orangered; font-size: 19px; font-weight: bolder;">

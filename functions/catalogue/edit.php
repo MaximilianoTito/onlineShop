@@ -1,7 +1,7 @@
 <?php
 require "../../db/conn.php";
 
-
+// Obtener los datos del producto a editar
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
     $query = "SELECT * FROM catalogue WHERE id=$id";
@@ -10,14 +10,16 @@ if (isset($_GET["id"])) {
         $row = mysqli_fetch_array($result);
         $id = $row["id"];
         $name = $row["name"];
-        $quantity= $row["quantity"];
+        $quantity = $row["quantity"];
         $description = $row["description"];
         $price = $row["price"];
         $status = $row["status"];
-        $catalogprice= $row["catalogprice"];
+        $catalogprice = $row["catalogprice"];
+        $img = $row["img"]; // Guardar la imagen actual
     }
 }
 
+// Actualizar el producto
 if (isset($_POST["update"])) {
     $idup = $_GET["id"];
     $nameup = $_POST["name"];
@@ -25,64 +27,70 @@ if (isset($_POST["update"])) {
     $quantityup = $_POST["quantity"];
     $priceup = $_POST["price"];
     $catalogpriceup = $_POST['catalogprice'];
-    //$n_img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
 
-    $queryup = "UPDATE catalogue SET name = '$nameup', description= '$descriptionup', price= '$priceup', img= '$n_img', quantity='$quantityup', catalogprice= '$catalogpriceup' WHERE id= $id";
+    // Manejo de imagen
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $imageName = $_FILES['image']['name'];
+        $imageTmp = $_FILES['image']['tmp_name'];
+        $imageExt = pathinfo($imageName, PATHINFO_EXTENSION);
+        $newImageName = uniqid('img_', true) . '.' . $imageExt;
+        $imagePath = "../../uploads/" . $newImageName;
+
+        // Mover la imagen a la carpeta de uploads
+        move_uploaded_file($imageTmp, $imagePath);
+
+        // Actualizar la imagen en la base de datos
+        $queryup = "UPDATE catalogue SET name = '$nameup', description = '$descriptionup', price = '$priceup', img = '$newImageName', quantity = '$quantityup', catalogprice = '$catalogpriceup' WHERE id = $idup";
+    } else {
+        // Si no se sube una nueva imagen, mantén la imagen actual
+        $queryup = "UPDATE catalogue SET name = '$nameup', description = '$descriptionup', price = '$priceup', img = '$img', quantity = '$quantityup', catalogprice = '$catalogpriceup' WHERE id = $idup";
+    }
+
+    // Ejecutar la consulta de actualización
     mysqli_query($conn, $queryup);
-    echo '<script>alert("hola");</script>';
-        header("Location: /onlineShop/views/auth/logged.php");
 
+    // Redirigir después de la actualización
+    header("Location: /onlineShop/views/auth/logged.php");
+    exit;
 }
 ?>
-<?php include '../../shared/header.php' ?>
-<?php include '../../shared/navloggedb.php' ?>
+<?php include '../../shared/header.php'; ?>
+<?php include '../../shared/navloggedb.php'; ?>
 
 <div style="padding: auto; margin: auto;" class="card w-75 mt-5 mb-5">
     <div class="card-header">
-        <img style="border-radius: 50%; width: 125px; height: 125px;"
-            src="data:image/jpg; base64, <?php echo base64_encode($row['img']) ?>" alt="">
+        <img style="border-radius: 50%; width: 125px; height: 125px;" src="/onlineShop/uploads/<?php echo $img; ?>" alt="">
     </div>
     <div class="card-body">
-        <form action="/onlineShop/functions/catalogue/edit.php?id=<?php echo $_GET["id"] ?>" method="post"
-            enctype="multipart/form-data">
+        <form action="/onlineShop/functions/catalogue/edit.php?id=<?php echo $_GET["id"]; ?>" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">Nombre</span>
-                <input value="<?php echo $row["name"] ?>" type="text" class="form-control"
-                    placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"
-                    name="name" required >
+                <input value="<?php echo $name; ?>" type="text" class="form-control" placeholder="Nombre del producto" aria-label="Recipient's username" aria-describedby="basic-addon2" name="name" required>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">Precio</span>
-                <input value="<?php echo $row["price"] ?>" type="text" class="form-control"
-                    placeholder="precio" aria-label="precio" aria-describedby="basic-addon2"
-                    name="price" required>
+                <input value="<?php echo $price; ?>" type="text" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon2" name="price" required>
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">PrecioCatalogo</span>
-                <input type="text" value="<?php echo $row['catalogprice']?>" class="form-control"
-                placeholder="Precio Catalogo" aria-level="Precio Catalogo" aria-describedby="basic-addon2"
-                name="catalogprice" required>
+                <span class="input-group-text" id="basic-addon2">Precio Catalogo</span>
+                <input type="text" value="<?php echo $catalogprice; ?>" class="form-control" placeholder="Precio Catalogo" aria-level="Precio Catalogo" aria-describedby="basic-addon2" name="catalogprice" required>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">Cantidad</span>
-                <input value="<?php echo $row['quantity'] ?>" type="number" class="form-control"
-                name="quantity" required>
+                <input value="<?php echo $quantity; ?>" type="number" class="form-control" name="quantity" required>
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text">Descripcion</span>
-                <textarea class="form-control" name="description"
-                    aria-label="With textarea" required><?php echo $row["description"] ?></textarea>
+                <span class="input-group-text">Descripción</span>
+                <textarea class="form-control" name="description" aria-label="With textarea" required><?php echo $description; ?></textarea>
             </div>
             <div class="input-group mb-3">
-                <input type="file" required name="image" accept="image/*">
+                <input type="file" name="image" accept="image/*">
             </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-success" name="update">Actualizar</button>
             </div>
         </form>
     </div>
-    <div class="card-footer">
-
-    </div>
 </div>
-<?php include '../../shared/footer.php' ?>
+
+<?php include '../../shared/footer.php'; ?>

@@ -1,15 +1,11 @@
-<?php include '../db/conn.php' ?>
+<?php include '../db/conn.php'; ?>
 <?php
+// Realizamos la consulta a la base de datos
 $query = "SELECT * FROM catalogue";
 $resul = mysqli_query($conn, $query);
-/*
-while($row = mysqli_fetch_array($resul){ ?>
-<?php } ?>
-*/
-
 ?>
-<?php include '../shared/header.php' ?>
-<?php include '../shared/nav.php' ?>
+<?php include '../shared/header.php'; ?>
+<?php include '../shared/nav.php'; ?>
 <h5 style="color: #853400;" class="text-center pt-2 pb-2">Realiza tus pedidos</h5>
 <div class="container text-center">
   <div class="row align-items-center m-2">
@@ -40,22 +36,25 @@ while($row = mysqli_fetch_array($resul){ ?>
     <?php while ($row = mysqli_fetch_array($resul)) { ?>
     <div class="col">
       <div class="card h-100">
-        <img class="img rounded-start rounded-end" src="data:image/jpg;base64,<?php echo base64_encode($row['img']); ?>"
-          alt="...">
+        <?php if (!empty($row['img'])) { ?>
+          <img class="img rounded-start rounded-end" src="../uploads/<?php echo $row['img']; ?>" alt="Imagen del producto">
+        <?php } else { ?>
+          <p>Imagen no disponible</p>
+        <?php } ?>
         <div class="card-body">
           <h5 class="card-title"><span style="color: orangered; font-size: 20px; font-weight: bolder;">
-              <?php echo $row["name"] ?>
+              <?php echo $row["name"]; ?>
             </span></h5>
           <p style="color: #5f282c;" class="card-text">
-            <?php echo $row['description'] ?>
+            <?php echo $row['description']; ?>
           </p>
           <p><strong style="color: red;">Precio Catalogo:</strong>
-            <?php echo $row['catalogprice'] ?><span style="font-size: 14px;" class="text-muted"> incluye IVA</span>
+            <?php echo $row['catalogprice']; ?><span style="font-size: 14px;" class="text-muted"> incluye IVA</span>
           </p>
         </div>
         <a class="btn btn-success" target="_blank"
           href="https://wa.me/593992865788?text=Me%20interesa%20saber%20mas%20del%20producto%20*_<?php echo $row['name']?>_*%20con%20el%20costo%20de%20*_<?php echo $row['price']?>_*"
-          ; style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
           <svg fill="white" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="20" height="20">
             <circle cx="7" cy="22" r="2" />
             <circle cx="17" cy="22" r="2" />
@@ -71,8 +70,7 @@ while($row = mysqli_fetch_array($resul){ ?>
         </div>
       </div>
     </div>
-
     <?php } ?>
   </div>
 </div>
-<?php include '../shared/footer.php' ?>
+<?php include '../shared/footer.php'; ?>
